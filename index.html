@@ -31,14 +31,7 @@
             background-color: rgba(26, 27, 30, 0.85); /* Latar belakang sticky bar (disesuaikan dengan body) */
             backdrop-filter: blur(10px);
         }
-        .hero-image-placeholder {
-            background-image: url('https://raw.githubusercontent.com/strimapp/strim/main/strim-logo-ful-warna.png'); 
-            background-size: contain; 
-            background-repeat: no-repeat; 
-            background-position: center;
-            border-radius: 0.5rem; 
-            border: 1px solid #374151; 
-        }
+        /* .hero-image-placeholder Dihapus karena elemennya dihilangkan */
         .section-padding {
             padding-top: 4rem; 
             padding-bottom: 4rem; 
@@ -68,10 +61,20 @@
         }
         .nav-link {
             color: #d1d5db; 
-            font-size: 0.875rem; 
+            font-size: 0.875rem; /* text-sm */
         }
         .nav-link:hover {
             color: #3fe0d0; 
+        }
+        .mobile-menu-link {
+            display: block;
+            padding: 0.75rem 1.5rem; /* py-3 px-6 */
+            color: #d1d5db; /* text-gray-300 */
+            font-size: 0.875rem; /* text-sm */
+        }
+        .mobile-menu-link:hover {
+            background-color: #374151; /* bg-gray-700 */
+            color: #3fe0d0;
         }
     </style>
 </head>
@@ -82,20 +85,43 @@
             <a href="index.html">
                 <img src="https://raw.githubusercontent.com/strimapp/strim/main/strim-logo-ful-warna.png" alt="Logo Strim" class="logo-img">
             </a>
-            <nav class="flex items-center justify-end space-x-4 md:space-x-6">
+            
+            {/* Desktop Navigation */}
+            <nav class="hidden md:flex items-center justify-end space-x-4 md:space-x-6">
                 <a href="privacy.html" class="nav-link transition-colors">Kebijakan Privasi</a>
                 <a href="terms.html" class="nav-link transition-colors">Ketentuan</a>
                 <a href="#" class="accent-color hover-accent-color text-black font-semibold py-2 px-4 rounded-md text-sm transition duration-300 ease-in-out">
                     Download
                 </a>
             </nav>
+
+            {/* Mobile Burger Button */}
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-300 hover:text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        {/* Mobile Menu (Dropdown) */}
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800 border-t border-gray-700">
+            <a href="privacy.html" class="mobile-menu-link transition-colors">Kebijakan Privasi</a>
+            <a href="terms.html" class="mobile-menu-link transition-colors">Ketentuan</a>
+            <div class="p-4">
+                <a href="#" class="block text-center w-full accent-color hover-accent-color text-black font-semibold py-2.5 px-4 rounded-md text-sm transition duration-300 ease-in-out">
+                    Download
+                </a>
+            </div>
         </div>
     </header>
 
     <section id="hero" class="section-padding">
         <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+            {/* Konten Hero sekarang akan mengambil lebar penuh dan teks rata tengah pada layar md ke atas */}
+            <div class="flex flex-col items-center text-center"> {/* Menambahkan text-center untuk semua ukuran, items-center untuk md ke atas */}
+                <div class="w-full md:w-3/4 lg:w-2/3"> {/* Mengatur lebar konten teks */}
                     <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight accent-text">
                         YouTube Auto Livestreaming Pro
                     </h1>
@@ -106,8 +132,7 @@
                         Download
                     </a>
                 </div>
-                <div class="md:w-1/2 h-80 md:h-96 hero-image-placeholder">
-                </div>
+                {/* div dengan class hero-image-placeholder telah dihapus */}
             </div>
         </div>
     </section>
@@ -227,6 +252,15 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
 
 </body>
 </html>
